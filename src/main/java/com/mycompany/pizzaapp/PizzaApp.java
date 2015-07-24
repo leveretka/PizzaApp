@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import com.mycompany.infrastructure.ApplicationContext;
 import com.mycompany.infrastructure.Config;
 import com.mycompany.infrastructure.JavaConfig;
-import com.mycompany.pizzaapp.infrastructure.JavaConfigApplicationXontext;
+import com.mycompany.pizzaapp.infrastructure.JavaConfigApplicationContext;
 import com.mycompany.pizzapp.domain.Customer;
 import com.mycompany.pizzapp.domain.Order;
 import com.mycompany.pizzapp.repository.PizzaRepository;
@@ -27,7 +27,7 @@ public class PizzaApp {
      
         Config config = new JavaConfig();
     	
-    	ApplicationContext context = new JavaConfigApplicationXontext(config);
+    	ApplicationContext context = new JavaConfigApplicationContext(config);
     	OrderService orderService = (OrderService) context.getBean("orderService");
     	PizzaRepository pizzaRepository = (PizzaRepository) context.getBean("pizzaRepository");
     	

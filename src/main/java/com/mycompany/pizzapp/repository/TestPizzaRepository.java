@@ -15,7 +15,15 @@ import java.util.List;
  */
 public class TestPizzaRepository implements PizzaRepository {
     
-    private List<Pizza> pizzas = Arrays.asList(new Pizza(1, "Sea", 22.3, Pizza.Type.SEA), new Pizza(2, "Meat", 20.3, Pizza.Type.MEAT), new Pizza(3, "Vegeterian", 18.3, Pizza.Type.VEGETERIAN));
+    private List<Pizza> pizzas;
+    
+    public void init() {
+    	pizzas = Arrays.asList(
+        		new Pizza(1, "Sea", 22.3, Pizza.Type.SEA),
+        		new Pizza(2, "Meat", 20.3, Pizza.Type.MEAT),
+        		new Pizza(3, "Veg", 18.3, Pizza.Type.VEGETERIAN)
+        );
+    }
 
     @Override
     public Pizza getPizzaByID(Integer id) {
