@@ -23,7 +23,6 @@ public class SpringPizzaApp {
         Order order = orderService.placeNewOrder(customer, 1, 2, 3);
         
         System.out.println(order);
-
 		
 		appContext.close();
 	}
