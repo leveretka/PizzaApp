@@ -10,11 +10,7 @@ import com.mycompany.pizzapp.domain.Order;
 import com.mycompany.pizzapp.domain.Customer;
 import com.mycompany.pizzapp.repository.OrderRepository;
 import com.mycompany.pizzapp.repository.PizzaRepository;
-import com.mycompany.pizzapp.repository.TestOrderRepository;
-import com.mycompany.pizzapp.repository.TestPizzaRepository;
-import com.mycompany.infrastructure.ObjectFactory;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,7 +19,7 @@ import java.util.List;
  */
 public class SimpleOrderService implements OrderService {
     
-    private ObjectFactory objectFactory = ObjectFactory.getInstance();
+    //private ObjectFactory objectFactory = ObjectFactory.getInstance();
     
     private OrderRepository orderRepository;
     private PizzaRepository pizzaRepository;

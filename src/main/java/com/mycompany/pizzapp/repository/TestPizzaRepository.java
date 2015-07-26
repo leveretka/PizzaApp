@@ -6,7 +6,6 @@
 package com.mycompany.pizzapp.repository;
 
 import com.mycompany.pizzapp.domain.Pizza;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,12 +16,16 @@ public class TestPizzaRepository implements PizzaRepository {
     
     private List<Pizza> pizzas;
     
+    public void setPizzas(List<Pizza> pizzas) {
+    	this.pizzas = pizzas;
+    }
+    
     public void init() {
-    	pizzas = Arrays.asList(
-        		new Pizza(1, "Sea", 22.3, Pizza.Type.SEA),
-        		new Pizza(2, "Meat", 20.3, Pizza.Type.MEAT),
-        		new Pizza(3, "Veg", 18.3, Pizza.Type.VEGETERIAN)
-        );
+//    	pizzas = Arrays.asList(
+//        		new Pizza(1, "Sea", 22.3, PizzaType.SEA),
+//        		new Pizza(2, "Meat", 20.3, PizzaType.MEAT),
+//        		new Pizza(3, "Veg", 18.3, PizzaType.VEGETERIAN)
+//        );
     }
 
     @Override

@@ -5,7 +5,38 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean name="pizzaRepository" 
-			class="com.mycompany.pizzapp.repository.TestPizzaRepository" init-method="init"/>
+			class="com.mycompany.pizzapp.repository.TestPizzaRepository" init-method="init">
+	
+		<property name="pizzas">
+			<list>
+				<bean class="com.mycompany.pizzapp.domain.Pizza">
+					<constructor-arg value="1"/>
+					<constructor-arg value="Sea"/>
+					<constructor-arg value="22.3"/>
+					<constructor-arg>
+						<value type="com.mycompany.pizzapp.domain.PizzaType">SEA</value>
+					</constructor-arg>
+				</bean>
+				<bean class="com.mycompany.pizzapp.domain.Pizza">
+					<constructor-arg value="2"/>
+					<constructor-arg value="Meat"/>
+					<constructor-arg value="20.3"/>
+					<constructor-arg>
+						<value type="com.mycompany.pizzapp.domain.PizzaType">MEAT</value>
+					</constructor-arg>
+				</bean>
+				<bean class="com.mycompany.pizzapp.domain.Pizza">
+					<constructor-arg value="3"/>
+					<constructor-arg value="Veg"/>
+					<constructor-arg value="18.3"/>
+					<constructor-arg>
+						<value type="com.mycompany.pizzapp.domain.PizzaType">VEGETERIAN</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<bean name="orderRepository" 
 			class="com.mycompany.pizzapp.repository.TestOrderRepository"/>
 	

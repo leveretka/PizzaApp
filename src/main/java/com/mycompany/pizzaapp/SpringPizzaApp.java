@@ -5,7 +5,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mycompany.pizzapp.domain.Customer;
 import com.mycompany.pizzapp.domain.Order;
-import com.mycompany.pizzapp.repository.PizzaRepository;
 import com.mycompany.pizzapp.service.OrderService;
 
 public class SpringPizzaApp {

@@ -13,15 +13,9 @@ public class Pizza {
     private Integer id;
     private String name;
     private Double price;
-    private Type type; 
+    private PizzaType type; 
     
-    public enum Type{
-        VEGETERIAN,
-        SEA,
-        MEAT
-    }
-
-    public Pizza(Integer id, String name, Double price, Type type) {
+    public Pizza(Integer id, String name, Double price, PizzaType type) {
         this.id = id;
         this.name = name;
         this.price = price;
