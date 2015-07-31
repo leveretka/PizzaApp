@@ -6,6 +6,7 @@
 package com.mycompany.pizzapp.service;
 
 import com.mycompany.pizzapp.domain.Pizza;
+import com.mycompany.pizzapp.infrastructure.Benchmark;
 import com.mycompany.pizzapp.domain.Order;
 import com.mycompany.pizzapp.domain.Customer;
 import com.mycompany.pizzapp.repository.OrderRepository;
@@ -32,7 +33,7 @@ public class SimpleOrderService implements OrderService {
         
     }
     
-    
+    @Benchmark
     @Override
     public Order placeNewOrder(Customer customer, Integer ... pizzasID) {
         List<Pizza> pizzas = new ArrayList<>();
@@ -45,6 +46,11 @@ public class SimpleOrderService implements OrderService {
         orderRepository.saveOrder(newOrder);  // set Order Id and save Order to in-memory list
         return newOrder;
     }
+    
+    protected Order getNewOrder() {
+        return null;
+    }
+
 
 
 }

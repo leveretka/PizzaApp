@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.infrastructure;
+package com.mycompany.pizzapp.infrastructure;
 
 import com.mycompany.pizzapp.repository.TestOrderRepository;
 import com.mycompany.pizzapp.repository.TestPizzaRepository;
