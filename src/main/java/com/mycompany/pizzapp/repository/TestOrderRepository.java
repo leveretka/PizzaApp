@@ -9,10 +9,13 @@ import com.mycompany.pizzapp.domain.Order;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 /**
  *
  * @author margarita
  */
+@Repository
 public class TestOrderRepository implements OrderRepository {
     private List<Order> orders = new ArrayList<>();
 

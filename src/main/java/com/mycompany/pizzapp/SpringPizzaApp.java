@@ -26,7 +26,7 @@ public class SpringPizzaApp {
 
         String[] beans = appContext.getBeanDefinitionNames();
 
-        OrderService orderService = (OrderService) appContext.getBean("orderService");
+        OrderService orderService = (OrderService) appContext.getBean(OrderService.class);
 		
 		Customer customer = new Customer(1, "Margo");        
         

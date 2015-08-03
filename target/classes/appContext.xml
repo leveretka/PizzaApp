@@ -8,21 +8,20 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
    
+   	<context:annotation-config/>
+   	<context:component-scan base-package="com.mycompany.pizzapp.service"/>
+   	<context:component-scan base-package="com.mycompany.pizzapp.domain"/>
+
     <bean class="com.mycompany.pizzapp.infrastructure.CustomAnnotationBeanPostProcessor"/>
    
-    <bean name="orderService" 
-             class="com.mycompany.pizzapp.service.SimpleOrderService"
-          autowire="constructor">
-<!--        <constructor-arg>
-            <ref bean="orderRepository"/> 
-        </constructor-arg> 
-        <constructor-arg ref="pizzaRepository"/> -->        
-        <lookup-method name="getNewOrder" bean="order"/>
-    </bean>
+<!--     <bean name="orderService"  -->
+<!--              class="com.mycompany.pizzapp.service.SimpleOrderService"> -->
+<!--         <lookup-method name="getNewOrder" bean="order"/> -->
+<!--     </bean> -->
     
-    <bean name="order" 
+<!--     <bean name="order" 
           class="com.mycompany.pizzapp.domain.Order" 
           scope="prototype" destroy-method="destroy"/>
-  
+ -->  
     
 </beans>

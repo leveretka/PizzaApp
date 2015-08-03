@@ -8,8 +8,12 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
    
+   	<context:component-scan base-package="com.mycompany.pizzapp.repository"/>
+   
+   
 	<bean name="pizzaRepository" 
-			class="com.mycompany.pizzapp.repository.TestPizzaRepository" init-method="init">
+			class="com.mycompany.pizzapp.repository.TestPizzaRepository" 
+			init-method="init">
 	
 		<property name="pizzas">
 			<list>
@@ -41,7 +45,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		</property>
 	</bean>
     
-    <bean name="orderRepository"
+<!--     <bean name="orderRepository"
           class="com.mycompany.pizzapp.repository.TestOrderRepository"/> 
+    
+ -->    
     
 </beans>

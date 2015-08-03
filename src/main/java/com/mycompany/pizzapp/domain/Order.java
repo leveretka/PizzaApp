@@ -7,20 +7,36 @@ package com.mycompany.pizzapp.domain;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author margarita
  */
+
+@Component(value="order")
+@Scope(value="prtotype")
 public class Order {
     
     private Integer id;
     private List<Pizza> pizzas;
     private Customer customer;
+    private String name;
+    
+    static int count;
+    
+    
+    public Order() {
+        name = Integer.toString(count++);
+    }   
 
     public Order(Customer customer, List<Pizza> pizzas) {
         this.pizzas = pizzas;
         this.customer = customer;
     }
+    
+    
 
     public Integer getId() {
         return id;
@@ -46,6 +62,11 @@ public class Order {
         this.customer = customer;
     }
 
+    public void destroy(){
+        System.out.println("Distroy");
+    }
+
+    
     @Override
     public String toString() {
         return "Order{" + "id=" + id + ", pizzas=" + pizzas.toString() + ", customer=" + customer + '}';

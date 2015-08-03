@@ -14,10 +14,16 @@ import com.mycompany.pizzapp.repository.PizzaRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author margarita
  */
+@Service
 public class SimpleOrderService implements OrderService {
     
     //private ObjectFactory objectFactory = ObjectFactory.getInstance();
@@ -25,12 +31,19 @@ public class SimpleOrderService implements OrderService {
     private OrderRepository orderRepository;
     private PizzaRepository pizzaRepository;
 
+    @Autowired
     public SimpleOrderService(PizzaRepository pizzaRepository, 
     		OrderRepository orderRepository) throws InstantiationException, IllegalAccessException {
         
     	this.pizzaRepository = pizzaRepository;
         this.orderRepository = orderRepository;
         
+    }
+    
+    @Autowired
+    public void setMethod(PizzaRepository pizzaRepository) {
+    	System.out.println("PizzaRepo - testMethod");
+    	this.pizzaRepository = pizzaRepository;
     }
     
     @Benchmark
@@ -46,7 +59,7 @@ public class SimpleOrderService implements OrderService {
         orderRepository.saveOrder(newOrder);  // set Order Id and save Order to in-memory list
         return newOrder;
     }
-    
+    @Lookup(value="order")
     protected Order getNewOrder() {
         return null;
     }
