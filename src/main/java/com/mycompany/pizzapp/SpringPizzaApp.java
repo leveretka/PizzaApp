@@ -1,12 +1,21 @@
 package com.mycompany.pizzapp;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mycompany.pizzapp.domain.Customer;
 import com.mycompany.pizzapp.domain.Order;
+import com.mycompany.pizzapp.domain.Pizza;
+import com.mycompany.pizzapp.domain.PizzaType;
 import com.mycompany.pizzapp.repository.PizzaRepository;
 import com.mycompany.pizzapp.service.OrderService;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 public class SpringPizzaApp {
 	
@@ -22,17 +31,23 @@ public class SpringPizzaApp {
         PizzaRepository pizzaRepository 
         	= (PizzaRepository) appContext.getBean("pizzaRepository");
         
+        List<Pizza> pizzas = pizzaRepository.getAllPizzasWithType(PizzaType.SEA);
+        for (Pizza p: pizzas) {
+        	System.out.println(p);
+        }
+        
         System.out.println(pizzaRepository);
 
         String[] beans = appContext.getBeanDefinitionNames();
 
         OrderService orderService = (OrderService) appContext.getBean(OrderService.class);
-		
-		Customer customer = new Customer(1, "Margo");        
+        Pizza p = new Pizza("margo", 50.0, PizzaType.SEA);
         
-        Order order = orderService.placeNewOrder(customer, 1, 2, 3);
-        
-        System.out.println(order);
+//		Customer customer = new Customer("Margo");        
+//        
+//        Order order = orderService.placeNewOrder(customer, 2, 1, 1, 1);
+        pizzaRepository.save(p);
+        //System.out.println(order);
 		
 		appContext.close();
 	}

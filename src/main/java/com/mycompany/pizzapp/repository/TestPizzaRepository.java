@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author margarita
  */
-public class TestPizzaRepository implements PizzaRepository {
+public abstract class TestPizzaRepository implements PizzaRepository {
     
     private List<Pizza> pizzas;
     
@@ -37,5 +37,17 @@ public class TestPizzaRepository implements PizzaRepository {
         }
         return null;
     }
+
+	@Override
+	public List<Pizza> getAllPizzas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer save(Pizza p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

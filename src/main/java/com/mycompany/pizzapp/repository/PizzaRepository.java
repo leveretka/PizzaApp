@@ -5,7 +5,10 @@
  */
 package com.mycompany.pizzapp.repository;
 
+import java.util.List;
+
 import com.mycompany.pizzapp.domain.Pizza;
+import com.mycompany.pizzapp.domain.PizzaType;
 
 /**
  *
@@ -14,5 +17,7 @@ import com.mycompany.pizzapp.domain.Pizza;
 public interface PizzaRepository {
 
     Pizza getPizzaByID(Integer id);
-    
+    List<Pizza> getAllPizzas();
+    List<Pizza> getAllPizzasWithType(PizzaType type);    
+    public Integer save(Pizza p);
 }

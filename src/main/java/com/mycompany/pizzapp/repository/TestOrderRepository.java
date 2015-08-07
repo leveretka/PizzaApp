@@ -21,7 +21,7 @@ public class TestOrderRepository implements OrderRepository {
 
     @Override
     public void saveOrder(Order newOrder) {
-        newOrder.setId(orders.size() + 1);
+        //newOrder.setId(orders.size() + 1);
         orders.add(newOrder);
     }
     

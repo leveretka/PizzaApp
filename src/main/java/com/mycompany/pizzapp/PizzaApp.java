@@ -19,7 +19,7 @@ import com.mycompany.pizzapp.service.OrderService;
 public class PizzaApp {
     public static void main(String[] args) throws Exception {
         
-    	Customer customer = new Customer(1, "Margo");        
+    	Customer customer = new Customer("Margo");        
         
         //ObjectFactory objectFactory = ObjectFactory.getInstance(); 
         
