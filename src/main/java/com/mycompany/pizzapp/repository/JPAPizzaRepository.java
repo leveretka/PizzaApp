@@ -20,19 +20,34 @@ public class JPAPizzaRepository implements PizzaRepository {
 	
 	public List<Pizza> getAllPizzas() {
 		TypedQuery<Pizza> query = em.createQuery("select p from Pizza p", Pizza.class);
-		return query.getResultList();
+		List<Pizza> pizzas = query.getResultList();
+		return pizzas;
 	}
 	
 	@Override
 	public Pizza getPizzaByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Pizza> query = em.createQuery("select p from Pizza p where p.id = :id", Pizza.class);
+		query.setParameter("id", id);
+		Pizza pizza = query.getSingleResult();
+		return pizza;
 	}
 
 	@Transactional
 	@Override
 	public Integer save(Pizza p) {
-		em.persist(p);
+		if (p.getId() != null) {
+			if (getPizzaByID(p.getId()) == null) {
+				throw new IllegalArgumentException("Wrong id: " + p.getId() + "for pizza!");
+			}
+			Pizza pizza = getPizzaByID(p.getId());
+			
+			em.merge(pizza);
+			pizza.setName(p.getName());
+			pizza.setPrice(p.getPrice());
+			pizza.setType(p.getType());
+		} else {
+			em.persist(p);
+		}
 		return p.getId();
 	}
 

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.*;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TotalOrderCostCalculatorTest {
@@ -94,9 +96,9 @@ public class TotalOrderCostCalculatorTest {
 		pizzas.put(new Pizza(1, "Margo", 22.3, PizzaType.SEA), 1);
 		pizzas.put(new Pizza(2, "Margo1", 22.3, PizzaType.SEA), 1);
 		pizzas.put(new Pizza(3, "Margo2", 100.0, PizzaType.SEA), 1);
-		pizzas.put(new Pizza(4, "Margo", 22.3, PizzaType.SEA), 1);
-		pizzas.put(new Pizza(5, "Margo1", 22.3, PizzaType.SEA), 1);
-		pizzas.put(new Pizza(6, "Margo2", 22.3, PizzaType.SEA), 1);
+		pizzas.put(new Pizza(4, "Margo3", 22.3, PizzaType.SEA), 1);
+		pizzas.put(new Pizza(5, "Margo4", 22.3, PizzaType.SEA), 1);
+		pizzas.put(new Pizza(6, "Margo5", 22.3, PizzaType.SEA), 1);
 		double expectedPrice = 22.3 * 5 + 70;
 		
 		TotalOrderCostCaculator orderCostCaculator = new TotalOrderCostCaculator();

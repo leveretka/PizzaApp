@@ -7,6 +7,9 @@ package com.mycompany.pizzapp.service;
 
 import com.mycompany.pizzapp.domain.Customer;
 import com.mycompany.pizzapp.domain.Order;
+import com.mycompany.pizzapp.domain.Pizza;
+
+import java.util.Map;
 
 /**
  *
@@ -14,6 +17,10 @@ import com.mycompany.pizzapp.domain.Order;
  */
 public interface OrderService {
 
+
     Order placeNewOrder(Customer customer, Integer... pizzasID);
-    
+
+    Order placeNewOrder(Customer customer, Map<Pizza, Integer> pizzasInOrder);
+
+    Double calculateTotalPrice(Order order);
 }

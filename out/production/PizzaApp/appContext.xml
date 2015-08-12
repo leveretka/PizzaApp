@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+   
+   	<context:annotation-config/>
+   	<context:component-scan base-package="com.mycompany.pizzapp.service"/>
+   	<context:component-scan base-package="com.mycompany.pizzapp.domain"/>
+
+    <bean class="com.mycompany.pizzapp.infrastructure.CustomAnnotationBeanPostProcessor"/>
+   
+<!--     <bean name="orderService"  -->
+<!--              class="com.mycompany.pizzapp.service.SimpleOrderService"> -->
+<!--         <lookup-method name="getNewOrder" bean="order"/> -->
+<!--     </bean> -->
+    
+<!--     <bean name="order" 
+          class="com.mycompany.pizzapp.domain.Order" 
+          scope="prototype" destroy-method="destroy"/>
+ -->  
+    
+</beans>

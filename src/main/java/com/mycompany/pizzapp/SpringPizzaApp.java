@@ -30,25 +30,14 @@ public class SpringPizzaApp {
 
         PizzaRepository pizzaRepository 
         	= (PizzaRepository) appContext.getBean("pizzaRepository");
-        
-        List<Pizza> pizzas = pizzaRepository.getAllPizzasWithType(PizzaType.SEA);
-        for (Pizza p: pizzas) {
-        	System.out.println(p);
-        }
-        
-        System.out.println(pizzaRepository);
-
-        String[] beans = appContext.getBeanDefinitionNames();
 
         OrderService orderService = (OrderService) appContext.getBean(OrderService.class);
-        Pizza p = new Pizza("margo", 50.0, PizzaType.SEA);
-        
-//		Customer customer = new Customer("Margo");        
-//        
+
+		Customer customer = new Customer("Margo");
+
 //        Order order = orderService.placeNewOrder(customer, 2, 1, 1, 1);
-        pizzaRepository.save(p);
         //System.out.println(order);
-		
+
 		appContext.close();
 	}
 

@@ -6,6 +6,7 @@
 package com.mycompany.pizzapp.service;
 
 import com.mycompany.pizzapp.domain.Pizza;
+import com.mycompany.pizzapp.domain.TotalOrderCostCaculator;
 import com.mycompany.pizzapp.infrastructure.Benchmark;
 import com.mycompany.pizzapp.domain.Order;
 import com.mycompany.pizzapp.domain.Customer;
@@ -32,6 +33,9 @@ public class SimpleOrderService implements OrderService {
     
     private OrderRepository orderRepository;
     private PizzaRepository pizzaRepository;
+
+    @Autowired
+    private TotalOrderCostCaculator totalOrderCostCaculator;
 
     @Autowired
     public SimpleOrderService(PizzaRepository pizzaRepository, 
@@ -66,17 +70,25 @@ public class SimpleOrderService implements OrderService {
     			
     	}
     	
-//        List<Pizza> pizzas = new ArrayList<>();
-//       
-//        for(Integer id : pizzasID){
-//            pizzas.add(pizzaRepository.getPizzaByID(id));  // get Pizza from predifined in-memory list
-//        }
         Order newOrder = new Order(customer, pizzas);
        
         orderRepository.saveOrder(newOrder);  // set Order Id and save Order to in-memory list
         return newOrder;
     }
-    
+
+    @Override
+    public Order placeNewOrder(Customer customer, Map<Pizza, Integer> pizzasInOrder) {
+        Order newOrder = new Order(customer, pizzasInOrder);
+
+        orderRepository.saveOrder(newOrder);  // set Order Id and save Order to in-memory list
+        return newOrder;
+    }
+
+    @Override
+    public Double calculateTotalPrice(Order order) {
+        return totalOrderCostCaculator.calculateTotalOrderPrice(order.getPizzas());
+    }
+
     @Lookup(value="order")
     protected Order getNewOrder() {
         return null;

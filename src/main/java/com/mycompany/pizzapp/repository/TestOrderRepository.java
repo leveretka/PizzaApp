@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author margarita
  */
-@Repository
 public class TestOrderRepository implements OrderRepository {
     private List<Order> orders = new ArrayList<>();
 
