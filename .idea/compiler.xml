@@ -26,7 +26,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="PizzaApp" target="1.8" />
+      <module name="PizzaApp" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

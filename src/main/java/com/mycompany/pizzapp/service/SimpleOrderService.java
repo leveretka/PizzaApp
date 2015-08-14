@@ -5,6 +5,10 @@
  */
 package com.mycompany.pizzapp.service;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.mycompany.pizzapp.domain.Pizza;
 import com.mycompany.pizzapp.domain.TotalOrderCostCaculator;
 import com.mycompany.pizzapp.infrastructure.Benchmark;
@@ -12,6 +16,8 @@ import com.mycompany.pizzapp.domain.Order;
 import com.mycompany.pizzapp.domain.Customer;
 import com.mycompany.pizzapp.repository.OrderRepository;
 import com.mycompany.pizzapp.repository.PizzaRepository;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +36,6 @@ import org.springframework.stereotype.Service;
 public class SimpleOrderService implements OrderService {
     
     //private ObjectFactory objectFactory = ObjectFactory.getInstance();
-    
     private OrderRepository orderRepository;
     private PizzaRepository pizzaRepository;
 
@@ -45,7 +50,10 @@ public class SimpleOrderService implements OrderService {
         this.orderRepository = orderRepository;
         
     }
-    
+
+    public SimpleOrderService() {
+    }
+
     @Autowired
     public void setMethod(PizzaRepository pizzaRepository) {
     	System.out.println("PizzaRepo - testMethod");
@@ -87,6 +95,44 @@ public class SimpleOrderService implements OrderService {
     @Override
     public Double calculateTotalPrice(Order order) {
         return totalOrderCostCaculator.calculateTotalOrderPrice(order.getPizzas());
+    }
+
+    @Override
+    public Order getOrderById(Integer id) {
+        return orderRepository.getOrderByID(id);
+    }
+
+    @Override
+    public Order placeNewOrder(String jsonOrder) {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        JsonNode root = null;
+        Customer customer = null;
+        Integer[] pizzas = null;
+
+        try {
+            root = mapper.readTree(jsonOrder);
+
+            JsonNode customerNode = root.get("Customer");
+            String name = customerNode.get("name").asText();
+            customer = new Customer(name);
+
+            JsonNode pizzaIdsNode = root.get("Pizzas");
+            if(pizzaIdsNode.isArray()) {
+                pizzas = new Integer[pizzaIdsNode.size()];
+                int i = 0;
+                for (final JsonNode idNode : pizzaIdsNode) {
+                    pizzas[i] = idNode.asInt();
+                    i++;
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return placeNewOrder(customer, pizzas);
     }
 
     @Lookup(value="order")

@@ -7,6 +7,10 @@
         <title>Pizzas List</title>
     </head>
     <body>
+        <p>
+            Hello, ${name}! <br>
+            Your authorities: ${authorities}.
+        </p>
 
         <table border="1">
             <thead><tr>
@@ -39,6 +43,14 @@
         <a href="create"> Create new pizza </a> <br/>
         <form method="post" action="submitOrder">
             <input type="submit" value="Submit" />
+        </form>
+
+        <c:url var="logoutUrl" value="/logout"/>
+        <form method="post" action="${logoutUrl}">
+            <input type="submit" value="Log out" />
+            <input type="hidden"
+                    name="${_csrf.parameterName}"
+                    value="${_csrf.token}"/>
         </form>
 
     </body>

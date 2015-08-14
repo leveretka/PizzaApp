@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+	
+    <!--    <http auto-config="true" use-expressions="false">
+        <intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/**" access="ROLE_USER" />
+        <form-login login-page='/login.jsp' default-target-url="/index.jsp" always-use-default-target="true"/>
+        <logout logout-url="logout" invalidate-session="true" logout-success-url="/spring_security_login" />
+    </http>-->
+
+
+    <!--<http use-expressions="false">-->
+        <!--<intercept-url pattern="/login.jsp" access="isAnonymous"/>-->
+        <!--<form-login login-page="/login.jsp" always-use-default-target="true" default-target-url="/index.jsp"/>-->
+        <!--<logout logout-success-url="/login.jsp"/>-->
+
+    <!--</http>-->
+
+    <http>
+        <intercept-url pattern="/**" access="isFullyAuthenticated()"/>
+        <form-login/>
+        <logout/>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="andrey" password="123" authorities="ROLE_USER, ROLE_ADMIN" />
+                <user name="bob" password="456" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+
+    <!--<beans:bean id="userdetail" class="com.controller.UserDetail" />-->
+</beans:beans>

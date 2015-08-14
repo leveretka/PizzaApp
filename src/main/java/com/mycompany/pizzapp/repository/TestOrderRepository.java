@@ -23,5 +23,10 @@ public class TestOrderRepository implements OrderRepository {
         //newOrder.setId(orders.size() + 1);
         orders.add(newOrder);
     }
-    
+
+    @Override
+    public Order getOrderByID(Integer id) {
+        return null;
+    }
+
 }

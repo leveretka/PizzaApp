@@ -10,6 +10,9 @@ import com.mycompany.pizzapp.domain.Order;
 import com.mycompany.pizzapp.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -24,10 +27,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @SessionAttributes({"pizzasInOrder"})
 @RequestMapping("/pizza")
-public class PizzaController {
-
-    @Autowired
-    private PizzaService pizzaService;
+public class PizzaController extends AbstractPizzaController {
 
     @Autowired
     private OrderService orderService;
@@ -36,6 +36,10 @@ public class PizzaController {
     public String viewPizzas(Model model) {
         model.addAttribute("pizzas",
                 pizzaService.getAllPizzas());
+
+        Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("authorities", authentication.getAuthorities());
+        model.addAttribute("name", authentication.getName());
         return "pizzas";
     }
 
@@ -55,32 +59,6 @@ public class PizzaController {
             Model model) {
         model.addAttribute("pizza", pizza);
         return "newpizza";
-    }
-
-    protected Pizza getPizzabyId(Integer id) {
-        if (id<=0) throw new IllegalArgumentException("ID<0");
-        Pizza pizza = pizzaService.getPizzaById(id);
-        if (pizza == null)
-            throw new NotFoundPizzaException("Pizza id" + id + " not found" );
-        return pizza;
-
-    }
-
-    @InitBinder
-    private void pizzaBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(Pizza.class,
-                new PropertyEditorSupport() {
-
-                    @Override
-                    public void setAsText(String pizzasId) {
-                        Pizza pizza = null;
-                        if (pizzasId != null && !pizzasId.trim().isEmpty()) {
-                            Integer id = Integer.parseInt(pizzasId);
-                            pizza = getPizzabyId(id);
-                        }
-                        setValue(pizza);
-                    }
-                });
     }
 
     @RequestMapping(value = "/makeorder", method = RequestMethod.GET)
