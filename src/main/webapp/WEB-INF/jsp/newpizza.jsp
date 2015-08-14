@@ -1,4 +1,5 @@
-<%-- 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%--
     Document   : create
     Created on : Aug 10, 2015, 3:20:45 PM
     Author     : andrii
@@ -18,6 +19,7 @@
             Type : <input type="text" name="type" value="${pizza.type}"/></br>
             Price : <input type="text" name="price" value="${pizza.price}"/></br>
             <input type="submit" value="Create"/></br>
+            <sec:csrfInput/>
         </form>
     </body>
     

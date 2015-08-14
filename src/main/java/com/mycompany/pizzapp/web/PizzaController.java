@@ -10,6 +10,7 @@ import com.mycompany.pizzapp.domain.Order;
 import com.mycompany.pizzapp.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -54,6 +55,7 @@ public class PizzaController extends AbstractPizzaController {
         return "redirect:";
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(@RequestParam("pizzaid") Pizza pizza,
             Model model) {

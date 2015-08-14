@@ -7,6 +7,15 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 	
+
+    <!--<global-method-security secured-annotations="enabled"/>-->
+
+    <http pattern="/rest/**" create-session="stateless">
+        <intercept-url pattern="/**" access="hasRole('USER')"/>
+        <http-basic/>
+        <csrf disabled="true"/>
+    </http>
+
     <!--    <http auto-config="true" use-expressions="false">
         <intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/**" access="ROLE_USER" />
@@ -36,6 +45,8 @@
             </user-service>
         </authentication-provider>
     </authentication-manager>
+
+
 
 
     <!--<beans:bean id="userdetail" class="com.controller.UserDetail" />-->
