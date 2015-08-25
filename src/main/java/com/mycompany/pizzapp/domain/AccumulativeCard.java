@@ -18,9 +18,12 @@ public class AccumulativeCard {
 	@OneToOne
 	@JoinColumn(name="addres_id")
 	private Address address;
+
+	@OneToOne(mappedBy = "accumulativeCard")
+	private Customer customer;
 	
 	@Column(name="total")
-	private double totalSum;
+	private Double totalSum;
 
 	public AccumulativeCard() {
 		super();
@@ -28,6 +31,14 @@ public class AccumulativeCard {
 
 	public Integer getId() {
 		return id;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public void setId(Integer id) {
@@ -48,6 +59,10 @@ public class AccumulativeCard {
 
 	public void setTotalSum(double totalSum) {
 		this.totalSum = totalSum;
+	}
+
+	public void add(double sum) {
+		this.totalSum += sum;
 	}
 	
 	

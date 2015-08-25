@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 	
-
+<beans:import resource="repositoryContext.xml"/>
     <!--<global-method-security secured-annotations="enabled"/>-->
 
     <http pattern="/rest/**" create-session="stateless">
@@ -16,6 +16,11 @@
         <csrf disabled="true"/>
     </http>
 
+    <http pattern="/jsp/registration/**" create-session="stateless">
+        <intercept-url pattern="/**" access="permitAll"/>
+        <http-basic/>
+        <csrf disabled="true"/>
+    </http>
     <!--    <http auto-config="true" use-expressions="false">
         <intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/**" access="ROLE_USER" />
@@ -32,19 +37,28 @@
     <!--</http>-->
 
     <http>
-        <intercept-url pattern="/**" access="isFullyAuthenticated()"/>
+
+        <intercept-url pattern="/jsp/registration/"
+                       access="permitAll" />
+
+        <intercept-url pattern="/jsp/register/"
+                       access="permitAll" />
+
+
+        <intercept-url pattern="/jsp/pizza/**" access="isFullyAuthenticated()"/>
+        <intercept-url pattern="/jsp/order/**" access="isFullyAuthenticated()"/>
         <form-login/>
         <logout/>
     </http>
 
     <authentication-manager>
         <authentication-provider>
-            <user-service>
-                <user name="andrey" password="123" authorities="ROLE_USER, ROLE_ADMIN" />
-                <user name="bob" password="456" authorities="ROLE_USER" />
-            </user-service>
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query="select user_name, password, enabled from users where user_name = ?"
+                               authorities-by-username-query="select u.user_name, ur.authority from users u, user_roles ur where u.user_id = ur.user_id and u.user_name = ? " />
         </authentication-provider>
     </authentication-manager>
+
 
 
 

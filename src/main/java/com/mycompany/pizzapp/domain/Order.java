@@ -5,23 +5,11 @@
  */
 package com.mycompany.pizzapp.domain;
 
-import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import org.hibernate.annotations.ManyToAny;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="`order`")
 public class Order {
-    
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
     private Integer id;
@@ -47,7 +35,7 @@ public class Order {
 	@Column(name="qnt")
     private Map<Pizza, Integer> pizzas;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne//(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="customer_id")
 	private Customer customer;
 	
@@ -56,7 +44,12 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="address_id")
     private Address address;
-    
+
+    private Double totalCost;
+
+    @Transient
+    private final TotalOrderCostCalculator totalOrderCostCalculator = TotalOrderCostCalculator.getInstance();
+
     static int count;
     
     
@@ -115,7 +108,14 @@ public class Order {
         System.out.println("Distroy");
     }
 
-    
+    public Double getTotalCost() {
+        return totalCost;
+    }
+
+    public void calcTotalCost() {
+        totalCost = totalOrderCostCalculator.calculateTotalOrderPrice(pizzas, customer.getAccumulativeCard().getTotalSum());
+    }
+
     @Override
     public String toString() {
         return "Order{" + "id=" + id + ", pizzas=" + pizzas.toString() + ", customer=" + customer + '}';

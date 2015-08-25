@@ -5,12 +5,10 @@
  */
 package com.mycompany.pizzapp.service;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.mycompany.pizzapp.domain.Pizza;
-import com.mycompany.pizzapp.domain.TotalOrderCostCaculator;
+import com.mycompany.pizzapp.domain.TotalOrderCostCalculator;
 import com.mycompany.pizzapp.infrastructure.Benchmark;
 import com.mycompany.pizzapp.domain.Order;
 import com.mycompany.pizzapp.domain.Customer;
@@ -18,14 +16,12 @@ import com.mycompany.pizzapp.repository.OrderRepository;
 import com.mycompany.pizzapp.repository.PizzaRepository;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Lookup;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
 /**
@@ -40,7 +36,7 @@ public class SimpleOrderService implements OrderService {
     private PizzaRepository pizzaRepository;
 
     @Autowired
-    private TotalOrderCostCaculator totalOrderCostCaculator;
+    private TotalOrderCostCalculator totalOrderCostCalculator;
 
     @Autowired
     public SimpleOrderService(PizzaRepository pizzaRepository, 
@@ -79,6 +75,7 @@ public class SimpleOrderService implements OrderService {
     	}
     	
         Order newOrder = new Order(customer, pizzas);
+        newOrder.calcTotalCost();
        
         orderRepository.saveOrder(newOrder);  // set Order Id and save Order to in-memory list
         return newOrder;
@@ -94,7 +91,7 @@ public class SimpleOrderService implements OrderService {
 
     @Override
     public Double calculateTotalPrice(Order order) {
-        return totalOrderCostCaculator.calculateTotalOrderPrice(order.getPizzas());
+        return totalOrderCostCalculator.calculateTotalOrderPrice(order.getPizzas());
     }
 
     @Override
@@ -133,6 +130,16 @@ public class SimpleOrderService implements OrderService {
         }
 
         return placeNewOrder(customer, pizzas);
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderRepository.getAllOrders();
+    }
+
+    @Override
+    public List<Order> getAllCustomerOrders(Customer customer) {
+        return orderRepository.getAllCustomerOrders(customer);
     }
 
     @Lookup(value="order")

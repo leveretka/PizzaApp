@@ -5,12 +5,7 @@
  */
 package com.mycompany.pizzapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  *
@@ -26,11 +21,26 @@ public class Customer {
 	
     private String name;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="accumulativeCard_id")
     private AccumulativeCard accumulativeCard;
-    
-    public Customer(String name) {
+
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Customer() {
+	}
+
+	public Customer(String name) {
         this.name = name;
     }
 

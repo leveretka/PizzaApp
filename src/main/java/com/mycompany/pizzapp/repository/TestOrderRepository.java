@@ -5,6 +5,7 @@
  */
 package com.mycompany.pizzapp.repository;
 
+import com.mycompany.pizzapp.domain.Customer;
 import com.mycompany.pizzapp.domain.Order;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,16 @@ public class TestOrderRepository implements OrderRepository {
 
     @Override
     public Order getOrderByID(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return null;
+    }
+
+    @Override
+    public List<Order> getAllCustomerOrders(Customer customer) {
         return null;
     }
 

@@ -5,7 +5,10 @@
  */
 package com.mycompany.pizzapp.repository;
 
+import com.mycompany.pizzapp.domain.Customer;
 import com.mycompany.pizzapp.domain.Order;
+
+import java.util.List;
 
 /**
  *
@@ -16,4 +19,8 @@ public interface OrderRepository {
     void saveOrder(Order newOrder);
 
     Order getOrderByID(Integer id);
+
+    List<Order> getAllOrders();
+
+    List<Order> getAllCustomerOrders(Customer customer);
 }

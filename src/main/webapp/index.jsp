@@ -7,7 +7,9 @@
 <title>PizzaDeliveryApp</title>
 </head>
 <body>
-	<h1>Hello World!</h1>
-	${1+1}
+	<h1>Hello dear guest! Welcome to our Pizzeria!</h1>
+	<a href="jsp/registration">registration</a>
+	<a href="jsp/pizza/">menu</a>
+
 </body>
 </html>

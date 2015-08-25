@@ -26,7 +26,7 @@
     <p>Items:</p>
     <c:forEach var="pizza" items="${pizzasToShow}">
       <tr>
-        <td>${pizza.key.id}</td>
+        <td>${pizza.key.name}</td>
         <td>${pizza.key.type}</td>
         <td>${pizza.key.price}</td>
         <td>${pizza.value}</td>
@@ -35,5 +35,7 @@
   </table>
 
   <p>Total price is ${totalPrice}</p>
+  <a href="/PizzaApp/jsp/pizza/"> back to menu</a>
+
 </body>
 </html>

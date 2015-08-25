@@ -11,6 +11,7 @@ import com.mycompany.pizzapp.domain.Pizza;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.List;
 
 /**
  *
@@ -28,4 +29,8 @@ public interface OrderService {
     Order getOrderById(Integer id);
 
     Order placeNewOrder(String jsonOrder);
+
+    List<Order> getAllOrders();
+
+    List<Order> getAllCustomerOrders(Customer customer);
 }
