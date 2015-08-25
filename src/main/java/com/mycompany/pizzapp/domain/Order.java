@@ -48,7 +48,8 @@ public class Order {
     private Double totalCost;
 
     @Transient
-    private final TotalOrderCostCalculator totalOrderCostCalculator = TotalOrderCostCalculator.getInstance();
+    @Autowired
+    private TotalOrderCostCalculator totalOrderCostCalculator;
 
     static int count;
     

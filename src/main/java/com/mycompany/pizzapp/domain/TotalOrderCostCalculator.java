@@ -11,13 +11,8 @@ import java.util.Iterator;
 @Component
 public class TotalOrderCostCalculator {
 
-	private static final TotalOrderCostCalculator instance = new TotalOrderCostCalculator();
 
-	private TotalOrderCostCalculator(){}
-
-	public static TotalOrderCostCalculator getInstance() {
-		return instance;
-	}
+	public TotalOrderCostCalculator(){}
 
 	public double calculateTotalOrderPrice(Map<Pizza, Integer> pizzas) {
 
@@ -59,7 +54,7 @@ public class TotalOrderCostCalculator {
 	}
 	public double calculateTotalOrderPrice(Map<Pizza, Integer> pizzas, double accumulativeSum) {
 
-		if (pizzas == null || pizzas.size() == 0) {
+		if (pizzas == null || pizzas.size() == 0 || accumulativeSum < 0) {
 			throw new IllegalArgumentException();
 		}
 

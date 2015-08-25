@@ -9,8 +9,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
    
    	<context:annotation-config/>
+    <context:component-scan base-package="com.mycompany.pizzapp.domain"/>
    	<context:component-scan base-package="com.mycompany.pizzapp.service"/>
-   	<context:component-scan base-package="com.mycompany.pizzapp.domain"/>
 
     <bean class="com.mycompany.pizzapp.infrastructure.CustomAnnotationBeanPostProcessor"/>
    
